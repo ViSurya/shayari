@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Hindi Love Shayari Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #537;
+    --secondary-color: #2815b8;
+    --bg-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --text-color: #333;
+    --white: #fff;
+    --light-gray: #ccc;
+    --border-radius: 10px;
+    --box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    --container-max-width: 800px;
+}
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.hero {
+    border: solid 1px var(--light-gray);
+    max-width: var(--container-max-width);
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.mainquotes {
+    width: 100%;
+    max-width: var(--container-max-width);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mainquotes .quote {
+    font-size: 2rem !important;
+}
+
+.mainquotes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://img.freepik.com/premium-vector/vibrant-love-background_69619-34.jpg);
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.mainquotes::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3));
+    z-index: -1;
+}
+
+
+/* Container Styles */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Header Styles 
+.header {
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+*/
+/* Content Styles */
+.content {
+    padding: 10px;
+    margin-top: 10px;
+    /* margin-bottom: 35px; */
+}
+
+.quote-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 200px;
+}
+
+.quote-area i {
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.quote-area {
+    font-size: 22px;
+    text-align: center;
+    word-break: break-all;
+    padding: 0 20px;
+}
+
+.author {
+    display: flex;
+    font-size: 18px;
+    font-style: italic;
+    justify-content: flex-end;
+}
+
+.author span:first-child {
+    margin: -7px 5px 0 0;
+    font-family: monospace;
+}
+
+/* Buttons Styles */
+.buttons {
+    border-top: 1px solid var(--light-gray);
+    padding-top: 20px;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.features ul {
+    display: flex;
+    list-style: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.features ul li {
+    margin: 0 5px;
+    height: 47px;
+    width: 47px;
+    display: flex;
+    cursor: pointer;
+    color: var(--primary-color);
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.features ul li:hover {
+    color: var(--white);
+    background-color: var(--primary-color);
+}
+
+.features button,
+.button {
+    border: none;
+    outline: none;
+    color: var(--white);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 13px 22px;
+    border-radius: 30px;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.features button.new-shayari,
+.button {
+    background-color: var(--primary-color);
+}
+
+.features button i {
+    margin-right: 8px;
+}
+
+button.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+
+/* Text Styles */
+.text {
+    text-align: justify;
+}
+
+.text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.text p {
+    margin-bottom: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.close {
+    color: var(--light-gray);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .header {
+        font-size: 28px;
+    }
+
+    .quote-area .quote {
+        font-size: 18px;
+        padding: 0 10px;
+    }
+
+    .features ul li {
+        height: 40px;
+        width: 40px;
+    }
+
+    .features button {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+
+    .controls button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .shareChildBtn {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
+}
+
+.pnbtn {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+}
+
+.share-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.share-button {
+    border-radius: 20px;
+    border: 2px solid #9b59b6;
+    color: #9b59b6;
+    background-color: transparent;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    min-width: 250px;
+    width: 40%;
+}
+
+.share-button:hover {
+    background-color: #9b59b6;
+    color: #fff;
+}
+
+.shareconth2 {
+    font-size: large;
+    font-style: oblique;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: solid 2px var(--light-gray);
+}
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <h1 class="header">Random Hindi Love Shayari Generator</h1>
+    </div>
+    <div class="mainquotes">
+        <div class="text">
+            <div class="quote-area">
+                <i class="fas fa-quote-left"></i>
+                <p class="quote"></p>
+                <i class="fas fa-quote-right"></i>
+            </div>
+            <div class="author">
+                <span>__</span>
+                <span class="name"></span>
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="features">
+                <ul>
+                    <li class="sound"><i class="fas fa-volume-up"></i></li>
+                    <li class="copy"><i class="fas fa-copy"></i></li>
+                    <li class="twitter"><i class="fab fa-twitter"></i></li>
+                </ul>
+                <button id="newShayariBtn" class="new-shayari"><i class="fas fa-sync-alt"></i> &nbsp;&nbsp;New
+                    Shayari</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container share-container">
+        <div class="shareconth2">
+            <h2>Share Options</h2>
+        </div>
+        <div class="secondcont share-buttons">
+          <button class="share-button whatsapp">
+            <i class="fab fa-whatsapp"></i> Share on WhatsApp
+          </button>
+          <button class="share-button facebook">
+            <i class="fab fa-facebook-f"></i> Share on Facebook
+          </button>
+          <button class="share-button twitter">
+            <i class="fab fa-twitter"></i> Share on Twitter
+          </button>
+          <button class="share-button instagram">
+            <i class="fab fa-instagram"></i> Share on Instagram
+          </button>
+          <button class="share-button linkedin">
+            <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+          </button>
+          <button class="share-button pinterest">
+            <i class="fab fa-pinterest"></i> Share on Pinterest
+          </button>
+          <button class="share-button reddit">
+            <i class="fab fa-reddit"></i> Share on Reddit
+          </button>
+          <button class="share-button tumblr">
+            <i class="fab fa-tumblr"></i> Share on Tumblr
+          </button>
+          <button class="share-button email">
+            <i class="fas fa-envelope"></i> Share via Email
+          </button>
+        </div>
+    </div>
+
+    <div class="container text">
+        <h2>About Random Shayari Generator</h2>
+        <p>Random Shayari Generator is a web application that generates random Hindi shayari (poetry) with just a click
+            of a button. It provides a beautiful and user-friendly interface to display the shayari along with the name
+            of the poet.</p>
+        <p>You can easily copy the shayari text, share it on Twitter, or even listen to an audio playback of the
+            shayari. Additionally, there are various controls available to navigate between different shayaris, download
+            the audio quote, toggle the background image, and download a screenshot of the quote.</p>
+        <p>The application also offers sharing options, allowing you to copy the link to the current shayari and share
+            it on various social media platforms with just a single click.</p>
+        <p>Random Shayari Generator is designed to provide a seamless and enjoyable experience for anyone who loves
+            Hindi poetry and wants to discover new shayaris with ease.</p>
+    </div>
+
+    <!-- Modal for Download Options -->
+    <div id="downloadModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Download Options</h2>
+            <p>Choose the download format:</p>
+            <button id="downloadPNGBtn"><i class="fas fa-file-image"></i> Download as PNG</button>
+            <button id="downloadJPGBtn"><i class="fas fa-file-image"></i> Download as JPG</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+    var shayaris;
+    var audioPlayer = new Audio();
+    var urlParams = new URLSearchParams(window.location.hash.substr(1));
+    var id = urlParams.get('id');
+    var isAudioPlaying = false;
+
+    // Load the JSON file
+    $.getJSON("love.json", function (data) {
+        shayaris = data;
+        if (id && id !== '') {
+            var shayari = shayaris.find(item => item.id == id);
+            if (shayari) {
+                displayShayari(shayari);
+            }
+        } else {
+            generateRandomShayari();
+        }
+    });
+
+    // Event listener for the "New Shayari" button
+    $("#newShayariBtn").click(function () {
+        generateRandomShayari();
+    });
+
+    // Event listener for the "Sound" button
+    $(".sound").click(function () {
+        var currentShayari = getCurrentShayari();
+        if (currentShayari) {
+            if (isAudioPlaying) {
+                audioPlayer.pause();
+                isAudioPlaying = false;
+            } else {
+                audioPlayer.src = currentShayari.file;
+                audioPlayer.play();
+                isAudioPlaying = true;
+            }
+        }
+    });
+
+    // Event listener for the "Copy" button
+    $(".copy").click(function () {
+        var shayariText = $(".quote").text();
+        copyToClipboard(shayariText);
+    });
+
+    // Event listener for the "Share on WhatsApp" button
+    $(".whatsapp").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var shareUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shayariText);
+        window.open(shareUrl, "_blank");
+    });
+
+    // Event listener for the "Share on Facebook" button
+    $(".facebook").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shayariText);
+        window.open(shareUrl, "_blank");
+    });
+
+   // Event listener for the "Share on Instagram" button
+$(".instagram").click(function () {
+    alert("Instagram does not support direct sharing of text content. You can share a link to your website or a photo on Instagram.");
+});
+
+
+    // Event listener for the "Share on Twitter" button
+    $(".twitter").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var shareUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shayariText);
+        window.open(shareUrl, "_blank");
+    });
+
+    // Event listener for the "Share on LinkedIn" button
+    $(".linkedin").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var shareUrl = "https://www.linkedin.com/shareArticle?mini=true&url=&title=" + encodeURIComponent(shayariText) + "&summary=&source=";
+        window.open(shareUrl, "_blank");
+    });
+
+    // Event listener for the "Share on Pinterest" button
+    $(".pinterest").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var shareUrl = "https://pinterest.com/pin/create/button/?url=&media=&description=" + encodeURIComponent(shayariText);
+        window.open(shareUrl, "_blank");
+    });
+
+    // Event listener for the "Share on Reddit" button
+    $(".reddit").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var shareUrl = "https://reddit.com/submit?url=&title=" + encodeURIComponent(shayariText);
+        window.open(shareUrl, "_blank");
+    });
+
+    // Event listener for the "Share on Tumblr" button
+    $(".tumblr").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var shareUrl = "https://www.tumblr.com/share/link?url=&name=&description=" + encodeURIComponent(shayariText);
+        window.open(shareUrl, "_blank");
+    });
+
+    // Event listener for the "Share via Email" button
+    $(".email").click(function () {
+        var shayariText = $(".quote").text().replace(/\n/g, " , ") + " | From - matlabidunia.in";
+        var subject = "Check out this beautiful shayari!";
+        var shareUrl = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(shayariText);
+        window.location.href = shareUrl;
+    });
+
+    function displayShayari(shayari) {
+        // Replace '\n' characters with comma and space
+        var formattedShayari = shayari.shayari.replace(/\n/g, " , ");
+        // Add author and website information
+        formattedShayari;
+        // Display formatted shayari text
+        $(".quote").text(formattedShayari);
+        $(".name").text(shayari.poet_name);
+        // Set original shayari text for audio playback
+        $(".quote").data("original-text", shayari.file);
+    }
+
+    function getCurrentShayari() {
+        var currentShayariText = $(".quote").data("original-text");
+        return shayaris.find(shayari => shayari.file === currentShayariText);
+    }
+
+    function generateRandomShayari() {
+        var randomShayari = shayaris[Math.floor(Math.random() * shayaris.length)];
+        displayShayari(randomShayari);
+        // Update URL parameter
+        updateUrlParameter('id', randomShayari.id);
+        // Stop audio playback when generating new shayari
+        if (isAudioPlaying) {
+            audioPlayer.pause();
+            isAudioPlaying = false;
+        }
+    }
+
+    function updateUrlParameter(key, value) {
+        var urlParams = new URLSearchParams(window.location.hash.substr(1));
+        urlParams.set(key, value);
+        window.location.hash = '#' + urlParams.toString();
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert("Shayari copied to clipboard!");
+            })
+            .catch((err) => {
+                console.error("Failed to copy shayari: ", err);
+            });
+    }
+});
+
+    </script>
+    <script>
+        
+    </script>
+</body>
+
+</html>
